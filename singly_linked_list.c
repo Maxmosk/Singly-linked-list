@@ -99,18 +99,25 @@ void single_list_print (single_list list, FILE *out)
     assert (*list != NULL);
     assert (out != NULL);
     
+    fprintf (out, "========================================\n");
+    fprintf (out, "Printing list by adress %p\n", list);
     
     SLL *elem = *list;
     
+    size_t index = 0;
     do
     {
-        fprintf (out, "Pointer: %p;\tData: ", elem);
+        fprintf (out, "Index: %d;\tPointer: %p;\tData: ", index, elem);
         single_list_print_elem (elem->data, out);
         fprintf (out, ";\tNext: %p;\n", elem->next);
         
         elem = (SLL *) elem->next;
+        
+        index++;
     }
     while (elem != NULL);
+    
+    fprintf (out, "========================================\n");
 }
 
 int single_list_append (single_list list, list_data_type value)
