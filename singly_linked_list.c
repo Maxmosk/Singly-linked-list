@@ -192,3 +192,50 @@ int single_list_assign (single_list list, list_data_type value, size_t index)
     return SUCCESS;
 }
 
+int single_list_pop (single_list list, list_data_type *ret_ptr, size_t index)
+{
+    CHECK_PTR_RET(list, NULL_POINTER_ERROR);
+    CHECK_PTR_RET(*list, NULL_POINTER_ERROR);
+    
+    
+    //  Special case: poping at the beginning of the list
+    if (index == 0)
+    {
+        SLL *elem = *list;
+        
+        if (ret_ptr != NULL)
+        {
+            *ret_ptr = elem->data;
+        }
+        
+        *list = (SLL *) elem->next;
+        
+        free (elem);
+        
+        
+        return SUCCESS;
+    }
+    
+    
+    SLL *prev = NULL;
+    
+    int status = single_list_index_ptr (list, &prev, index-1);
+    CHECK_PTR_RET(prev, status);
+    
+    SLL *elem = (SLL *) prev->next;
+    CHECK_PTR_RET(elem, OUTRUN_ERROR);
+        
+    if (ret_ptr != NULL)
+    {
+        *ret_ptr = elem->data;
+    }
+    
+    prev->next = elem->next;
+    
+    
+    free (elem);
+    
+    
+    return SUCCESS;
+}
+

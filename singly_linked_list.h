@@ -145,5 +145,16 @@ int single_list_insert (single_list list, list_data_type value, size_t index);
 */
 int single_list_assign (single_list list, list_data_type value, size_t index);
 
+/** @fn single_list_pop
+ *  @brief The function to delete element and return is's value
+ *  @param list List for poping
+ *  @param ret_ptr Adress of memory for returnimg of value
+ *  @param index Index of element for poping
+ *  @return Code from enum RETURN_CODES
+ *  @warning Changes the value at the address ret_ptr
+ *  @note If you needn't to get this value, pass null pointer in ret_ptr
+*/
+int single_list_pop (single_list list, list_data_type *ret_ptr, size_t index);
+
 #endif
 
