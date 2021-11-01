@@ -97,9 +97,10 @@ int single_list_index_ptr (single_list list, SLL **ret_ptr, size_t index);
 int single_list_index (single_list list, list_data_type *ret_ptr, size_t index);
 
 /** @fn single_list_dtor
-    @brief The function for singly linked list destructing
-    @param list List for destructing
-    @warning Chanes thy value by addres
+ *  @brief The function for singly linked list destructing
+ *  @param list List for destructing
+ *  @warning Chanes thy value by addres
+ *  @return Code from enum RETURN_CODES
 */
 int single_list_dtor (single_list *list);
 
@@ -123,7 +124,16 @@ void single_list_print_elem (list_data_type value, FILE *out);
  *  @param list List variable to append element
  *  @param value Value of new element
 */
-int single_list_append (single_list list, list_data_type value)
+int single_list_append (single_list list, list_data_type value);
+
+/** @fn single_list_insert
+ *  @brief The function for inserting of element on the some place
+ *  @param list List for inserting
+ *  @param value Data for inserting at the this place
+ *  @param index Number of new element
+ *  @return Code from enum RETURN_CODES
+*/
+int single_list_insert (single_list list, list_data_type value, size_t index);
 
 #endif
 

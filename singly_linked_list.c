@@ -136,3 +136,26 @@ int single_list_append (single_list list, list_data_type value)
     return SUCCESS;
 }
 
+int single_list_insert (single_list list, list_data_type value, size_t index)
+{
+    CHECK_PTR_RET(list, NULL_POINTER_ERROR);
+    CHECK_PTR_RET(*list, NULL_POINTER_ERROR);
+    
+    
+    SLL *prev = NULL;
+    
+    int status = single_list_index_ptr (list, &prev, index - 1);
+    CHECK_PTR_RET(prev, status);
+    
+    SLL *new_elem = (SLL *) calloc (1, sizeof (SLL));
+    CHECK_PTR_RET(new_elem, CALLOC_ERROR);
+    
+    new_elem->data = value;
+    new_elem->next = (SLL *) prev->next;
+    
+    prev->next = (char *) new_elem;
+    
+    
+    return SUCCESS;
+}
+
