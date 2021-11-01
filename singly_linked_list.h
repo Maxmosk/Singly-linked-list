@@ -135,5 +135,15 @@ int single_list_append (single_list list, list_data_type value);
 */
 int single_list_insert (single_list list, list_data_type value, size_t index);
 
+/** @fn single_list_assign
+ *  @brief The fubction for assignment of element of list
+ *  @param list List for assignment
+ *  @param value New value of element
+ *  @param index Index of element for assignment
+ *  @return Code from enum RETURN_CODES
+ *  @note ASSign, only gachi, only hardcore
+*/
+int single_list_assign (single_list list, list_data_type value, size_t index);
+
 #endif
 

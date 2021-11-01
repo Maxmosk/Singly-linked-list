@@ -123,13 +123,13 @@ int single_list_append (single_list list, list_data_type value)
     
     while (elem->next != NULL)
     {
-        elem = elem->next;
+        elem = (SLL *) elem->next;
     }
     
     elem->next = calloc (1, sizeof (SLL));
     CHECK_PTR_RET(elem->next, CALLOC_ERROR);
     
-    elem = elem->next;
+    elem = (SLL *) elem->next;
     elem->data = value;
     elem->next = NULL;
     
@@ -142,6 +142,22 @@ int single_list_insert (single_list list, list_data_type value, size_t index)
     CHECK_PTR_RET(*list, NULL_POINTER_ERROR);
     
     
+    //  Special case: insertion at the beginning of the list
+    if (index == 0)
+    {
+        SLL *new_elem = (SLL *) calloc (1, sizeof (SLL));
+        CHECK_PTR_RET(new_elem, CALLOC_ERROR);
+        
+        new_elem->data = value;
+        new_elem->next = (char *) *list;
+        
+        *list = new_elem;
+        
+        
+        return SUCCESS;
+    }
+    
+    
     SLL *prev = NULL;
     
     int status = single_list_index_ptr (list, &prev, index - 1);
@@ -151,9 +167,26 @@ int single_list_insert (single_list list, list_data_type value, size_t index)
     CHECK_PTR_RET(new_elem, CALLOC_ERROR);
     
     new_elem->data = value;
-    new_elem->next = (SLL *) prev->next;
+    new_elem->next = prev->next;
     
     prev->next = (char *) new_elem;
+    
+    
+    return SUCCESS;
+}
+
+int single_list_assign (single_list list, list_data_type value, size_t index)
+{
+    CHECK_PTR_RET(list, NULL_POINTER_ERROR);
+    CHECK_PTR_RET(*list, NULL_POINTER_ERROR);
+    
+    
+    SLL *elem = NULL;
+    
+    int status = single_list_index_ptr (list, &elem, index);
+    CHECK_PTR_RET(elem, status);
+    
+    elem->data = value;
     
     
     return SUCCESS;
