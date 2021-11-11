@@ -7,5 +7,11 @@
 */
 #define SLL_TYPE int
 
+/* @def SINGLE_LIST_VENOM
+ * @brief Define for value of data in destructed element
+ * @note Please, set it before using list
+*/
+#define SINGLE_LIST_VENOM -1
+
 #endif
 

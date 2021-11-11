@@ -14,8 +14,6 @@
 */
 #define SLNGLE_LIST_INIT calloc (1, sizeof (SLL *))
 
-#define SINGLE_LIST_VENOM -1
-
 /** @def CHECK_PTR_RET
  *  @brief The macro for checking of null-pointer
  *  @param FISTING_ASS_PTR Pointer for checking
@@ -25,10 +23,24 @@
 */
 #define CHECK_PTR_RET(FISTING_ASS_PTR, DUNGEON_CODE)    \
     assert ((FISTING_ASS_PTR) != NULL);                 \
-	if ((FISTING_ASS_PTR) == NULL)                      \			
+	if ((FISTING_ASS_PTR) == NULL)                      \
 	{						                            \
 		return DUNGEON_CODE;			                \
 	}
+
+/** @def INTERCEPT_SLL_ERROR
+ *  @brief The macro to intercept error of functions of single_list
+ *  @param ASS_STATUS Return status of any function
+ *  @warning Use only in main function
+ *  @note Only gachi, only hardcore
+*/
+#define INTERCEPT_SLL_ERROR(ASS_STATUS)                 \
+    assert ((ASS_STATUS) == SUCCESS);                   \
+    if ((ASS_STATUS) != SUCCESS)                        \
+    {                                                   \
+        printf ("Error with code %d\n", (ASS_STATUS));  \
+        return 0;                                       \
+    }
 
 
 /**
@@ -155,6 +167,25 @@ int single_list_assign (single_list list, list_data_type value, size_t index);
  *  @note If you needn't to get this value, pass null pointer in ret_ptr
 */
 int single_list_pop (single_list list, list_data_type *ret_ptr, size_t index);
+
+/** @fn list_data_type_compare
+ *  @drief The function to compare elements of list
+ *  @return 0 if elements are equal
+ *          positive if elem_1 is greater
+ *          negative if elem_2 is greater
+ *  @note User of list must wrinte this function in file "compare_elem.c"
+*/
+int list_data_type_compare (list_data_type *elem_1, list_data_type *elem_2);
+
+/** @fn single_list_bubble_sort
+ *  @brief The function for sorting of single_list
+ *  @details This fubction sorts list by algorithm of bubble sorting
+ *  @return Code from enum RETURN_CODES
+ *  @warning Changes the memory of list
+*/
+int single_list_bubble_sort (single_list list,
+                                int (*compare) (const void *, const void *));
+
 
 #endif
 

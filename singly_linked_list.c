@@ -246,3 +246,56 @@ int single_list_pop (single_list list, list_data_type *ret_ptr, size_t index)
     return SUCCESS;
 }
 
+int single_list_bubble_sort (single_list list,
+                                int (*compare) (const void *, const void *))
+{
+    CHECK_PTR_RET(list, NULL_POINTER_ERROR);
+    CHECK_PTR_RET(*list, NULL_POINTER_ERROR);
+
+    //printf ("IN SORT\n");
+    int flag_sorted = 0;
+
+    while (!flag_sorted)
+    {
+        char **prv = (char **) list;
+        SLL *p_1 = *list;
+        SLL *p_2 = (SLL *) (*list)->next;
+
+        flag_sorted = 1;
+
+
+        while (p_2 != NULL)
+        {
+            SLL *p_next_1 = p_2;
+            SLL *p_next_2 = (SLL *) p_2->next;
+
+            if (compare (&(p_1->data), &(p_2->data)) > 0)
+            {
+                flag_sorted = 0;
+
+
+                *prv = (char *) p_2;
+                p_next_1 = p_1;
+
+                char *buffer = p_2->next;
+                p_1->next = p_2->next;
+                p_2->next = (char *) p_1;
+
+                prv = &(p_2->next);
+            }
+            else
+            {
+                prv = &(p_1->next);
+            }
+
+
+            p_1 = p_next_1;
+            p_2 = p_next_2;
+        }
+
+        //printf ("STEP_END\n");
+    }
+
+
+    return SUCCESS;
+}
