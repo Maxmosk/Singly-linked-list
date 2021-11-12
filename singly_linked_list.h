@@ -23,10 +23,10 @@
 */
 #define CHECK_PTR_RET(FISTING_ASS_PTR, DUNGEON_CODE)    \
     assert ((FISTING_ASS_PTR) != NULL);                 \
-	if ((FISTING_ASS_PTR) == NULL)                      \
-	{						                            \
-		return DUNGEON_CODE;			                \
-	}
+    if ((FISTING_ASS_PTR) == NULL)                      \
+    {                                                   \
+        return DUNGEON_CODE;                            \
+    }
 
 /** @def INTERCEPT_SLL_ERROR
  *  @brief The macro to intercept error of functions of single_list
@@ -44,42 +44,42 @@
 
 
 /**
- *	@enum RETURN_CODES
- *	@brief return codes of functions for list
+ *  @enum RETURN_CODES
+ *  @brief return codes of functions for list
 */
 enum RETURN_CODES
 {
-	SUCCESS = 0,
-	NULL_POINTER_ERROR = 1,
-	CALLOC_ERROR = 2,
-	OUTRUN_ERROR = 3
+    SUCCESS = 0,
+    NULL_POINTER_ERROR = 1,
+    CALLOC_ERROR = 2,
+    OUTRUN_ERROR = 3
 };
 
 
-/**	@typedef list_data_type
- *	@brief Type of data if list
- *	@note Can be setted by user in file "settings.h"
+/** @typedef list_data_type
+ *  @brief Type of data if list
+ *  @note Can be setted by user in file "settings.h"
 */
 typedef SLL_TYPE list_data_type;
 
-/*	@typedef SLL
- *	@brief The structure of singly linked list
+/*  @typedef SLL
+ *  @brief The structure of singly linked list
 */
 typedef struct
 {
-	char *next;
-	list_data_type data;
+    char *next;
+    list_data_type data;
 } SLL;
 
-/**	@typedef single_list
- *	@brief Typr of singly linked list for easy processing
+/** @typedef single_list
+ *  @brief Typr of singly linked list for easy processing
 */
 typedef SLL **single_list;
 
 
-/**	@fn single_list_ctor
- *	@brief The function for singly linked list constructing
- *	@details The function creates list in 'list', initialize by init
+/** @fn single_list_ctor
+ *  @brief The function for singly linked list constructing
+ *  @details The function creates list in 'list', initialize by init
  *      and null-pointer
  *  @param[in] list List to construct
  *  @param[in] init Value to initialize
