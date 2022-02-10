@@ -71,7 +71,6 @@ int single_list_dtor (single_list *list)
     
 	
 	SLL *elem = NULL;
-	int status = single_list_index_ptr (*list, &elem, 0);
     
     SLL *next_elem = NULL;
     
@@ -100,14 +99,14 @@ void single_list_print (single_list list, FILE *out)
     assert (out != NULL);
     
     fprintf (out, "========================================\n");
-    fprintf (out, "Printing list by adress %p\n", list);
+    fprintf (out, "Printing list by adress %p\n", (void *) list);
     
     SLL *elem = *list;
     
     size_t index = 0;
     do
     {
-        fprintf (out, "Index: %d;\tPointer: %p;\tData: ", index, elem);
+        fprintf (out, "Index: %lu;\tPointer: %p;\tData: ", index, (void *) elem);
         single_list_print_elem (elem->data, out);
         fprintf (out, ";\tNext: %p;\n", elem->next);
         
@@ -247,7 +246,7 @@ int single_list_pop (single_list list, list_data_type *ret_ptr, size_t index)
 }
 
 int single_list_bubble_sort (single_list list,
-                                int (*compare) (const void *, const void *))
+                                int (*compare) (const list_data_type *, const list_data_type *))
 {
     CHECK_PTR_RET(list, NULL_POINTER_ERROR);
     CHECK_PTR_RET(*list, NULL_POINTER_ERROR);
@@ -277,7 +276,6 @@ int single_list_bubble_sort (single_list list,
                 *prv = (char *) p_2;
                 p_next_1 = p_1;
 
-                char *buffer = p_2->next;
                 p_1->next = p_2->next;
                 p_2->next = (char *) p_1;
 

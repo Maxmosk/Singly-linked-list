@@ -6,12 +6,12 @@
 void random_list (single_list list, size_t n);
 
 
-int main ()
+int main (void)
 {
 	size_t numb = 0;
 
 	printf ("Please, input number of elements of list: ");
-	scanf ("%d", &numb);
+	scanf ("%lu", &numb);
 
 
 	single_list my_list = SLNGLE_LIST_INIT;
@@ -23,8 +23,7 @@ int main ()
 
 	single_list_print (my_list, stdout);
 
-	status = single_list_bubble_sort (my_list,
-		(int (*)(list_data_type *, list_data_type *)) list_data_type_compare);
+	status = single_list_bubble_sort (my_list, list_data_type_compare);
 	INTERCEPT_SLL_ERROR(status);
 
 	single_list_print (my_list, stdout);

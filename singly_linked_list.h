@@ -177,7 +177,7 @@ int single_list_pop (single_list list, list_data_type *ret_ptr, size_t index);
  *          negative if elem_2 is greater
  *  @note User of list must wrinte this function in file "compare_elem.c"
 */
-int list_data_type_compare (list_data_type *elem_1, list_data_type *elem_2);
+int list_data_type_compare (const list_data_type *elem_1, const list_data_type *elem_2);
 
 /** @fn single_list_bubble_sort
  *  @brief The function for sorting of single_list
@@ -188,7 +188,7 @@ int list_data_type_compare (list_data_type *elem_1, list_data_type *elem_2);
  *  @warning Changes the memory of list
 */
 int single_list_bubble_sort (single_list list,
-                                int (*compare) (const void *, const void *));
+                                int (*compare) (const list_data_type *, const list_data_type *));
 
 
 #endif
